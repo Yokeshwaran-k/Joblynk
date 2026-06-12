@@ -40,6 +40,8 @@ export async function POST(request: Request) {
       body.password,
       user.password
     );
+    console.log(body.password);
+console.log(user.password);
 
     if (!isPasswordValid) {
       return NextResponse.json(

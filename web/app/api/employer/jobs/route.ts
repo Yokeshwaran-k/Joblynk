@@ -86,3 +86,74 @@ export async function POST(request: NextRequest) {
 
   }
 }
+
+export async function GET(request: NextRequest) {
+  try {
+
+    const authHeader = request.headers.get("authorization");
+
+    if (!authHeader) {
+      return NextResponse.json(
+        {
+          success: false,
+          message: "Token missing",
+        },
+        { status: 401 }
+      );
+    }
+
+    const token = authHeader.split(" ")[1];
+
+    const decoded = verifyToken(token) as {
+      id: number;
+      role: string;
+    };
+
+    if (decoded.role !== "EMPLOYER") {
+      return NextResponse.json(
+        {
+          success: false,
+          message: "Only employers can access this",
+        },
+        { status: 403 }
+      );
+    }
+
+    const jobs = await prisma.job.findMany({
+      where: {
+        employerId: decoded.id,
+      },
+      include: {
+        worker: {
+          select: {
+            id: true,
+            name: true,
+            phone: true,
+            skill: true,
+            experience: true,
+            dailyWage: true,
+          },
+        },
+      },
+    });
+
+    return NextResponse.json({
+      success: true,
+      total: jobs.length,
+      data: jobs,
+    });
+
+  } catch (error) {
+
+    console.error(error);
+
+    return NextResponse.json(
+      {
+        success: false,
+        message: "Something went wrong",
+      },
+      { status: 500 }
+    );
+
+  }
+}
