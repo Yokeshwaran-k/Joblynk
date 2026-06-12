@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/app/lib/prisma";
 import bcrypt from "bcrypt";
+import { generateToken } from "@/app/lib/jwt";
 
 export async function POST(request: Request) {
   try {
@@ -49,11 +50,17 @@ export async function POST(request: Request) {
         { status: 401 }
       );
     }
+    const token = generateToken({
+      id: user.id,
+      email: user.email,
+      role: user.role,
+    });
 
     // Login Success
     return NextResponse.json({
       success: true,
       message: "Login successful",
+      token,
       data: {
         id: user.id,
         name: user.name,
