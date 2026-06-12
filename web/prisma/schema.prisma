@@ -36,4 +36,45 @@ model User {
 
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
+  postedJobs   Job[] @relation("EmployerJobs")
+  acceptedJobs Job[] @relation("AssignedWorker")
+}
+
+model Job {
+  id          Int       @id @default(autoincrement())
+
+  title       String
+  description String
+
+  skill       String
+  budget      Int
+
+  address     String
+  pincode     String
+  district    String
+  state       String
+
+  workDate    DateTime
+
+  status      JobStatus @default(OPEN)
+
+  employerId  Int
+  employer    User @relation("EmployerJobs", fields: [employerId], references: [id])
+
+  workerId    Int?
+  worker      User? @relation("AssignedWorker", fields: [workerId], references: [id])
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([skill])
+  @@index([pincode])
+  @@index([status])
+}
+
+enum JobStatus {
+  OPEN
+  ACCEPTED
+  COMPLETED
+  CANCELLED
 }
