@@ -1,6 +1,8 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
+  
   return (
     <main className="min-h-screen bg-[#F5F5F7]">
 
@@ -10,9 +12,12 @@ export default function Home() {
           Joblynk
         </h1>
 
-        <button className="text-[#0071E3] font-semibold hover:underline">
+        <Link
+          href="/login"
+          className="text-[#0071E3] font-semibold hover:underline"
+        >
           Login
-        </button>
+        </Link>
       </nav>
 
       {/* Hero Section */}

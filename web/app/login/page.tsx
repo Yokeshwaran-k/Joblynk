@@ -29,6 +29,12 @@ export default function LoginPage() {
       "token",
       data.token
     );
+    console.log("Token:", data.token);
+
+console.log(
+  "Stored token:",
+  localStorage.getItem("token")
+);
 
     localStorage.setItem(
       "user",

@@ -1,6 +1,20 @@
 
+"use client";
+
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+
 export default function WorkerDashboard() {
-  
+  const router = useRouter();
+  useEffect(() => {
+
+  const token = localStorage.getItem("token");
+console.log(token)
+  if (!token) {
+    router.push("/login");
+  }
+
+}, []);
   return (
     <main className="min-h-screen bg-[#F5F5F7]">
 
