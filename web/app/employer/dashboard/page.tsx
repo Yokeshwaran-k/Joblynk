@@ -1,29 +1,11 @@
 "use client";
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
 import ProtectedRoute from "@/app/components/ProtectedRoute";
 export default function EmployerDashboardPage() {
 
   return (
     <ProtectedRoute>
     <main className="min-h-screen bg-[#F5F5F7]">
-
-      {/* Navbar */}
-
-      <nav className="bg-white shadow-sm">
-        <div className="max-w-7xl mx-auto flex justify-between items-center p-6">
-
-          <h1 className="text-3xl font-bold text-[#1D1D1F]">
-            Joblynk
-          </h1>
-
-          <button className="text-red-500 font-semibold">
-            Logout
-          </button>
-
-        </div>
-      </nav>
-
       {/* Content */}
 
       <div className="max-w-6xl mx-auto p-8">

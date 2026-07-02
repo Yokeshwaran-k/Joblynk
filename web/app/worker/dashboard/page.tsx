@@ -3,6 +3,7 @@
 
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
+import Logout from "@/app/components/Logout";
 
 export default function WorkerDashboard() {
   const router = useRouter();
@@ -17,16 +18,6 @@ console.log(token)
 }, []);
   return (
     <main className="min-h-screen bg-[#F5F5F7]">
-
-      <nav className="flex justify-between items-center p-6 bg-white shadow-sm">
-        <h1 className="text-3xl font-bold text-[#1D1D1F]">
-          Joblynk
-        </h1>
-
-        <button className="text-red-500 font-semibold">
-          Logout
-        </button>
-      </nav>
 
       <div className="max-w-6xl mx-auto p-8">
 
